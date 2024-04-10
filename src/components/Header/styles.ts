@@ -22,9 +22,13 @@ export const Title = styled.h1<Props>`
 
 export const LinksContainer = styled.div`
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: 60px;
+
+    ${Title}{
+        margin-left: 340px;
+        margin-right: 190px;
+    }
 `
 
 export const HLink = styled.a`

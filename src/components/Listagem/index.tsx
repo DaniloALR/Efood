@@ -44,7 +44,7 @@ const pizzas = [
 const Listagem = () => (
     <Container>
         {pizzas.map(p => (
-            <ItemContainer>
+            <ItemContainer key={p.id}>
                 <img src={p.image} alt={p.title} />
                 <Title>{p.title}</Title>
                 <Text>{p.description}</Text>
