@@ -3,12 +3,30 @@ import { FoodList } from "../../pages/Home"
 import Header from "../Header"
 import { Container, ItemContainer, Title, Text, Button, Modal, ModalContent, Close, Detalhes } from "./styles"
 import close from '../../assets/images/close.png'
+import { useDispatch } from "react-redux"
+import { add, open } from "../../store/reducers/cart"
 
 type Props = {
     comida: FoodList
 }
 
+export type Prato = {
+    foto: string
+    preco: number
+    id: number
+    nome: string
+    descricao: string
+    porcao: string
+}
+
 const ProductList = ({comida}: Props) => {
+    const dispatch = useDispatch()
+
+    const addToCart = (plate: any) => {
+        dispatch(add(plate))
+        dispatch(open())
+    }
+
     const [modal, setModal] = useState({
         isVisible: false,
         nome: '',
@@ -79,7 +97,19 @@ const ProductList = ({comida}: Props) => {
                                         <p>
                                             Serve: de {modal.porcao}
                                         </p>
-                                        <button>Adicionar ao carrinho - R${modal.preco}</button>
+                                        <button onClick={ () => {
+                                            addToCart(modal)
+                                            setModal({
+                                                isVisible: false,
+                                                nome: '',
+                                                preco: 0,
+                                                descricao: '',
+                                                porcao: '',
+                                                id: 0,
+                                                foto: ''
+                                            })
+                                        }
+                                        } >Adicionar ao carrinho - R${modal.preco}</button>
                                     </div>
                                 </Detalhes>
                             </ModalContent>
