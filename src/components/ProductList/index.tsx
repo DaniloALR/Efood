@@ -19,12 +19,23 @@ export type Prato = {
     porcao: string
 }
 
+type ModalState = {
+    isVisible: boolean
+    nome: string
+    preco: number
+    descricao: string
+    porcao: string
+    id: number
+    foto: string
+}
+
 const ProductList = ({comida}: Props) => {
     const dispatch = useDispatch()
 
-    const addToCart = (plate: any) => {
+    const addToCart = (plate: ModalState) => {
         dispatch(add(plate))
         dispatch(open())
+        console.log(dispatch(open()))
     }
 
     const [modal, setModal] = useState({
